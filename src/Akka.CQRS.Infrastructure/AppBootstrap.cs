@@ -24,6 +24,21 @@ namespace Akka.CQRS.Infrastructure
         public static Config BoostrapApplication(this Config c, AppBootstrapConfig appConfig)
         {
             var config = c;
+            if (appConfig.NeedPersistence)
+            {
+                var mongoConnectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STR")?.Trim();
+                if (string.IsNullOrEmpty(mongoConnectionString))
+                {
+                    Console.WriteLine("ERROR! MongoDb connection string not provided. Can't start.");
+                    throw new ConfigurationException("ERROR! MongoDb connection string not provided. Can't start.");
+                }
+                else
+                {
+                    Console.WriteLine("Connecting to MongoDb at {0}", mongoConnectionString);
+                }
+
+                config = c.WithFallback(GetMongoHocon(mongoConnectionString));
+            }
 
             config = config
                 .WithFallback(GetOpsConfig())
