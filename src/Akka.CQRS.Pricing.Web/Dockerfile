@@ -11,7 +11,7 @@ EXPOSE 80
 EXPOSE 16666 
 
 # Install Petabridge.Cmd client
-RUN dotnet tool install --global pbm 
+RUN dotnet tool install --global pbm --version 1.2.2
 
 COPY ./bin/Release/netcoreapp3.1/publish/ /app
 

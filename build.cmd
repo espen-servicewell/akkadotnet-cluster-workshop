@@ -1,1 +1,1 @@
-PowerShell.exe -file "build.ps1" %* 
+PowerShell.exe -ExecutionPolicy Bypass -file "build.ps1" %* 

@@ -12,7 +12,7 @@ ENV MONGO_CONNECTION_STR "" #MongoDb connection string for Akka.Persistence
 EXPOSE 9110 6055
 
 # Install Petabridge.Cmd client
-RUN dotnet tool install --global pbm 
+RUN dotnet tool install --global pbm --version 1.2.2
 
 COPY ./bin/Release/netcoreapp3.1/publish/ /app
 
